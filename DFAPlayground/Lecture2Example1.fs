@@ -5,7 +5,7 @@ type State =
     | State_q1
     | State_q2
 
-let delta a q =
+let delta q a =
     match q with
     | State_q0 ->
         match a with
@@ -21,9 +21,17 @@ let verify str =
     let rec dfaCycle s q =
         match s with
         | [] -> State_q0
-        | [ x ] -> delta x q
-        | x :: xs -> delta x q |> dfaCycle xs
+        | [ x ] -> delta q x
+        | x :: xs -> delta q x |> dfaCycle xs
 
     match dfaCycle (str |> List.ofSeq) State_q0 with
     | State_q2 -> true
     | _ -> false
+
+let verifyViaFold str =
+    (State_q0, str |> List.ofSeq)
+    ||> List.fold delta
+    |> (=) State_q2
+
+let verify1 =
+    CustomDfa.verifyCustomDfa State_q0 State_q2 delta

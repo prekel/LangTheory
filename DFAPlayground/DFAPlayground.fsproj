@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="CustomDfa.fs" />
         <Compile Include="Lecture2Example1.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>

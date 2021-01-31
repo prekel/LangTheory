@@ -1,6 +1,6 @@
 ﻿[<EntryPoint>]
-let main argv =
-    let a1 =
+let main _ =
+    let a =
         [ "00101010100"
           "0011"
           "01"
@@ -9,22 +9,36 @@ let main argv =
           "0"
           "001"
           "010"
-          "100" ]
+          "100"
+          ""
+          "00000011" ]
 
-    let r1 =
-        a1
-        |> List.map (fun s -> (s, Lecture2Example1.verify s))
+    let v =
+        [ Lecture2Example1.verify
+          Lecture2Example1.verifyViaFold
+          CustomDfa.verifyCustomDfa Lecture2Example1.State_q0 Lecture2Example1.State_q2 Lecture2Example1.delta
+          Lecture1Example2.verify
+          Seq.map Lecture1Example2.charToAlphabet
+          >> CustomDfa.verifyCustomDfa1 Lecture1Example2.dfa ]
 
-    let r2 =
-        a1
-        |> List.map (fun s -> (s, Lecture2Example1.verifyViaFold s))
+    let r =
+        a
+        |> List.map (fun s -> (s, v |> List.map (fun f -> f s)))
 
+    printfn "%A" r
 
-    let r3 =
-        a1
-        |> List.map (fun s ->
-            (s, CustomDfa.verifyCustomDfa Lecture2Example1.State_q0 Lecture2Example1.State_q2 Lecture2Example1.delta s))
+    let a2 =
+        a
+        |> List.map (fun s -> s.Replace('0', 'a').Replace('1', 'b'))
+        |> List.append [ "aaa"; "aaba" ]
 
-    printfn "%A" [ r1; r2; r3 ]
+    let f =
+        Seq.map (function
+            | 'a' -> Lab01Var01.A
+            | 'b' -> Lab01Var01.B
+            | _ -> failwith "never")
+        >> CustomDfa.verifyCustomDfa1 Lab01Var01.Dfa
+
+    printfn "%A" (a2 |> List.map (fun c -> (c, f c)))
 
     0

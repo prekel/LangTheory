@@ -6,7 +6,7 @@ type State =
     | State_q2
 
 let delta q a =
-    match q with
+    match   q with
     | State_q0 ->
         match a with
         | '0' -> State_q1
@@ -33,5 +33,5 @@ let verifyViaFold str =
     ||> List.fold delta
     |> (=) State_q2
 
-let verify1 =
-    CustomDfa.verifyCustomDfa State_q0 State_q2 delta
+let verify1 str =
+    CustomDfa.verifyCustomDfa State_q0 State_q2 delta str

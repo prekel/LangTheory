@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DFAPlayground", "DFAPlayground\DFAPlayground.fsproj", "{BA95BF25-8ACC-424A-8976-E3B9EFBD3CF8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA95BF25-8ACC-424A-8976-E3B9EFBD3CF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA95BF25-8ACC-424A-8976-E3B9EFBD3CF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA95BF25-8ACC-424A-8976-E3B9EFBD3CF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA95BF25-8ACC-424A-8976-E3B9EFBD3CF8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

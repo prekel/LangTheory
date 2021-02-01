@@ -57,5 +57,9 @@ let main _ =
         >> CustomDfa.verifyCustomDfa2 Lab01Var08a.Dfa 
 
     printfn "%A" (a |> List.map (fun c -> (c, f c)))
+    
+    let f = CustomDfa.stateDfa4 Else.Dfa 
+
+    printfn "%A" (["else"; "elsr" ; "elser" ; "els" ] |> List.map (fun c -> (c, f c)))
 
     0

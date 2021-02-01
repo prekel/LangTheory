@@ -67,11 +67,11 @@ let Dfa =
       Final = Set.singleton Q3 }
 
 let Dfa4 =
-    { Delta = deltaViaTable
+    { Dfa4.Delta = deltaViaTable
       Initial = Q0
       IsFinal = (Set.singleton Q3).Contains }
 
 let Dfa44 =
-    { Delta = deltaViaFunction
+    { Dfa4.Delta = deltaViaFunction
       Initial = Q0
       IsFinal = isFinal }

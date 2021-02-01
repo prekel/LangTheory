@@ -44,6 +44,37 @@ let delta =
         function
         | A0 -> Q6
         | A1 -> Q6
+        
+let deltaSome =
+    function
+    | Q0 ->
+        function
+        | A0 -> Some Q1
+        | A1 -> Some Q0
+    | Q1 ->
+        function
+        | A0 -> Some Q2
+        | A1 -> Some Q0
+    | Q2 ->
+        function
+        | A0 -> Some Q6
+        | A1 -> Some Q3
+    | Q3 ->
+        function
+        | A0 -> Some Q4
+        | A1 -> Some Q3
+    | Q4 ->
+        function
+        | A0 -> Some Q5
+        | A1 -> Some Q3
+    | Q5 ->
+        function
+        | A0 -> Some Q6
+        | A1 -> Some Q3
+    | Q6 ->
+        function
+        | A0 -> Some Q6
+        | A1 -> Some Q6
 
 open CustomDfa
 

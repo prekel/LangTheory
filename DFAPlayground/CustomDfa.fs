@@ -36,3 +36,35 @@ let stateDfa4 (dfa: Dfa4<_, _>) str =
     (dfa.Initial, str) ||> Seq.fold dfa.Delta
 
 let verifyCustomDfa4 (dfa: Dfa4<_, _>) str = stateDfa4 dfa str |> dfa.IsFinal
+
+// A<Q, Σ>
+type Dfa5<'Q, 'Sigma> =
+    { Delta: 'Q -> 'Sigma -> 'Q option // δ
+      Initial: 'Q // q0
+      IsFinal: 'Q -> bool } // F
+
+let stateDfa5 (dfa: Dfa5<_, _>) str =
+    (Some dfa.Initial, str)
+    ||> Seq.fold (fun state t ->
+            match state with
+            | Some a -> dfa.Delta a t
+            | None -> None)
+
+let stateDfa5b (dfa: Dfa5<_, _>) str =
+    (Some dfa.Initial, str)
+    ||> Seq.fold (fun state t -> Option.bind (fun a -> dfa.Delta a t) state)
+    
+let stateDfa5b1 (dfa: Dfa5<_, _>) str=
+    (Some dfa.Initial, str)
+    ||> Seq.fold (fun state t -> Option.bind (fun a -> dfa.Delta a t) state)
+
+type Result<'Q> =
+    | Ok
+    | NotReachedFinalState of 'Q
+    | NotReachedEndOfSeq
+
+let verifyCustomDfa5 (dfa: Dfa5<_, _>) str =
+    match stateDfa5b dfa str with
+    | Some q when dfa.IsFinal q -> Ok
+    | Some q -> NotReachedFinalState q
+    | None -> NotReachedEndOfSeq

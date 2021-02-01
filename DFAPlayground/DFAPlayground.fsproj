@@ -12,6 +12,7 @@
         <Compile Include="Lab01Var01.fs" />
         <Compile Include="Lab01Var02.fs" />
         <Compile Include="Lab01Var08a.fs" />
+        <Compile Include="Else.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

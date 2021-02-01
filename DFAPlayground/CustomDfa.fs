@@ -24,3 +24,15 @@ let stateDfa dfa str =
 
 
 let verifyCustomDfa2 dfa str = stateDfa dfa str |> dfa.Final.Contains
+
+
+// A<Q, Σ>
+type Dfa4<'Q, 'Sigma> =
+    { Delta: 'Q -> 'Sigma -> 'Q // δ
+      Initial: 'Q // q0
+      IsFinal: 'Q -> bool } // F
+
+let stateDfa4 (dfa: Dfa4<_, _>) str =
+    (dfa.Initial, str) ||> Seq.fold dfa.Delta
+
+let verifyCustomDfa4 (dfa: Dfa4<_, _>) str = stateDfa4 dfa str |> dfa.IsFinal

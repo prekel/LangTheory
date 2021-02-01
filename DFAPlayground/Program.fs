@@ -39,6 +39,23 @@ let main _ =
             | _ -> failwith "never")
         >> CustomDfa.verifyCustomDfa2 Lab01Var01.Dfa
 
-    printfn "%A" (a2 |> List.map (fun c -> (c, f c)))
+    let f1 =
+        Seq.map (function
+            | 'a' -> Lab01Var01.A
+            | 'b' -> Lab01Var01.B
+            | _ -> failwith "never")
+        >> CustomDfa.verifyCustomDfa4 Lab01Var01.Dfa44
+
+    printfn "%A" (a2 |> List.map (fun c -> (c, f1 c)))
+    
+    
+    let f =
+        Seq.map (function
+            | '0' -> Lab01Var08a.A0
+            | '1' -> Lab01Var08a.A1
+            | _ -> failwith "never")
+        >> CustomDfa.verifyCustomDfa2 Lab01Var08a.Dfa 
+
+    printfn "%A" (a |> List.map (fun c -> (c, f c)))
 
     0

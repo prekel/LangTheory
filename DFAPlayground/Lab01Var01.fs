@@ -26,6 +26,27 @@ let delta q a =
         | B -> Q2
     | Q3 -> Q3
 
+let deltaViaFunction =
+    function
+    | Q0 ->
+        function
+        | A -> Q1
+        | B -> Q0
+    | Q1 ->
+        function
+        | A -> Q2
+        | B -> Q1
+    | Q2 ->
+        function
+        | A -> Q3
+        | B -> Q2
+    | Q3 -> (fun _ -> Q3)
+
+let isFinal q =
+    match q with
+    | Q3 -> true
+    | _ -> false
+
 let deltaViaTable q a =
     Map.ofList [ ((Q0, A), Q1)
                  ((Q0, B), Q0)
@@ -44,3 +65,13 @@ let Dfa =
     { Delta = deltaViaTable
       Initial = Q0
       Final = Set.singleton Q3 }
+
+let Dfa4 =
+    { Delta = deltaViaTable
+      Initial = Q0
+      IsFinal = (Set.singleton Q3).Contains }
+
+let Dfa44 =
+    { Delta = deltaViaFunction
+      Initial = Q0
+      IsFinal = isFinal }

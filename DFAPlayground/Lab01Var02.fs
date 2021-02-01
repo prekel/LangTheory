@@ -1,14 +1,16 @@
-module Lab01Var01
+module Lab01Var02
 
 type Q =
     | Q0
     | Q1
     | Q2
     | Q3
+    | Q5
 
 type A =
-    | A
-    | B
+    | A1
+    | A2
+    | A3
 
 let delta q a =
     match q with
@@ -24,11 +26,15 @@ let delta q a =
         match a with
         | A -> Q3
         | B -> Q2
+    | Q3 ->
+        match a with
+        | A -> Q3
+        | B -> Q2
     | Q3 -> Q3
 
 open CustomDfa
 
-let Dfa =
-    { Initial = Q0
-      Final = Q3
-      Delta = delta }
+let Dfa<'Q, 'A> =
+    { Delta = delta
+      Initial = Q0
+      Final = Set.singleton Q3 }

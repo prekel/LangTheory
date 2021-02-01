@@ -37,7 +37,7 @@ let main _ =
             | 'a' -> Lab01Var01.A
             | 'b' -> Lab01Var01.B
             | _ -> failwith "never")
-        >> CustomDfa.verifyCustomDfa1 Lab01Var01.Dfa
+        >> CustomDfa.verifyCustomDfa2 Lab01Var01.Dfa
 
     printfn "%A" (a2 |> List.map (fun c -> (c, f c)))
 

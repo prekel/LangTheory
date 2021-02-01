@@ -43,6 +43,6 @@ let verify str = str |> Seq.map charToAlphabet |> verifyA
 open CustomDfa
 
 let dfa =
-    { Initial = Q0
+    { Dfa0.Initial = Q0
       Final = Q0
       Delta = delta }

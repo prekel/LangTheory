@@ -6,7 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Program.fs"/>
+        <Compile Include="Fa.fs" />
+        <Compile Include="Dfa.fs" />
+        <Compile Include="Nfa.fs" />
+        <Compile Include="Program.fs" />
     </ItemGroup>
 
 </Project>

@@ -53,8 +53,8 @@ let stateDfa5 (dfa: Dfa5<_, _>) str =
 let stateDfa5b (dfa: Dfa5<_, _>) str =
     (Some dfa.Initial, str)
     ||> Seq.fold (fun state t -> Option.bind (fun a -> dfa.Delta a t) state)
-    
-let stateDfa5b1 (dfa: Dfa5<_, _>) str=
+
+let stateDfa5b1 (dfa: Dfa5<_, _>) str =
     (Some dfa.Initial, str)
     ||> Seq.fold (fun state t -> Option.bind (fun a -> dfa.Delta a t) state)
 
@@ -68,3 +68,23 @@ let verifyCustomDfa5 (dfa: Dfa5<_, _>) str =
     | Some q when dfa.IsFinal q -> Ok
     | Some q -> NotReachedFinalState q
     | None -> NotReachedEndOfSeq
+
+// A<Q, Σ>
+type Nfa<'State, 'Alphabet when 'State: comparison> =
+    { Transition: 'State -> 'Alphabet -> 'State Set // δ
+      Initial: 'State // q0
+      Final: 'State Set } // F
+
+//let stateNfa (nfa:Nfa<int, char>) (str: seq<char>) =
+let stateNfa nfa str =
+    (Set.singleton nfa.Initial, str)
+    ||> Seq.fold (fun states current ->
+            states
+            |> Set.map (fun s -> nfa.Transition s current)
+            |> Set.unionMany)
+
+let verifyNfa nfa str =
+    stateNfa nfa str
+    |> Set.intersect nfa.Final
+    |> Set.isEmpty
+    |> (=) false

@@ -1,9 +1,9 @@
 module Dfa
 
 type State =
-    | Mod3Is0
-    | Mod3Is1
-    | Mod3Is2
+    | Mod3Is0 // q0
+    | Mod3Is1 // q1
+    | Mod3Is2 // q2
 
 type Alphabet =
     | A // a
@@ -24,6 +24,12 @@ let deltaViaTable q a =
       ((Mod3Is2, B), Mod3Is0) ]
     |> Map.ofList
     |> Map.find (q, a)
+
+let charToAlphabet c =
+    match c with
+    | 'a' -> A
+    | 'b' -> B
+    | _ -> failwith "Неверный символ"
 
 open Fa
 

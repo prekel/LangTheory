@@ -9,7 +9,7 @@ type Dfa<'State, 'Alphabet when 'State: comparison> =
 let stateDfa dfa str =
     (dfa.Initial, str) ||> Seq.fold dfa.Transition
 
-let verifyCustomDfa dfa str = stateDfa dfa str |> dfa.Final.Contains
+let verifyDfa dfa str = stateDfa dfa str |> dfa.Final.Contains
 
 // A<Q, Σ>
 type Nfa<'State, 'Alphabet when 'State: comparison> =
@@ -17,3 +17,15 @@ type Nfa<'State, 'Alphabet when 'State: comparison> =
       Initial: 'State // q0
       Final: 'State Set } // F
 
+let stateNfa nfa str =
+    (Set.singleton nfa.Initial, str)
+    ||> Seq.fold (fun states current ->
+            states
+            |> Seq.map (fun s -> nfa.Transition s current)
+            |> Set.unionMany)
+
+let verifyNfa nfa str =
+    stateNfa nfa str
+    |> Set.intersect nfa.Final
+    |> Set.isEmpty
+    |> (=) false

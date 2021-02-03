@@ -44,8 +44,6 @@ let stringToSeq (str: string) charToAlphabet = str |> Seq.map charToAlphabet
 let main _ =
     //Console.OutputEncoding <- Encoding.Unicode
     //Console.InputEncoding <- Encoding.Unicode
-
-    
     
     try
         printf "%s" "Введите номер задания (1/2, a/b, а/б): "

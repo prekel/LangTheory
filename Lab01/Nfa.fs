@@ -8,9 +8,6 @@ type State =
     | Q2A
     | Q2B
     | Q2C
-    | Q3A
-    | Q3B
-    | Q3C
     | Q4A
     | Q4B
     | Q4C
@@ -33,7 +30,7 @@ let delta q a =
     match q with
     | Initial ->
         match a with
-        | A0 -> Set.ofList [ Q1A; Q2A; Q3A; Q4A ]
+        | A0 -> Set.ofList [ Q1A; Q2A; Q4A ]
         | A1 -> Set.ofList [ Q5A; Q6A; Q7A ]
     | Q1A ->
         match a with
@@ -59,18 +56,6 @@ let delta q a =
         match a with
         | A0 -> Set.empty
         | A1 -> Set.singleton Final
-    | Q3A ->
-        match a with
-        | A0 -> Set.singleton Q3A
-        | A1 -> Set.singleton Q3B
-    | Q3B ->
-        match a with
-        | A0 -> Set.singleton Q3C
-        | A1 -> Set.empty
-    | Q3C ->
-        match a with
-        | A0 -> Set.empty
-        | A1 -> Set.singleton Final
     | Q4A ->
         match a with
         | A0 -> Set.singleton Q4A
@@ -93,7 +78,7 @@ let delta q a =
         | A1 -> Set.empty
     | Q5C ->
         match a with
-        | A0 -> Set.empty
+        | A0 -> Set.singleton Q5C
         | A1 -> Set.singleton Final
     | Q6A ->
         match a with

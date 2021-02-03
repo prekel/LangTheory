@@ -74,7 +74,7 @@ let delta q a =
         | A1 -> Set.empty
     | Q5B ->
         match a with
-        | A0 -> Set.singleton Q5B
+        | A0 -> Set.singleton Q5C
         | A1 -> Set.empty
     | Q5C ->
         match a with

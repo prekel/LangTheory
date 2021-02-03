@@ -15,11 +15,13 @@
 
     <ItemGroup>
         <Compile Include="UnitTest1.fs" />
+        <Compile Include="Lab1bTests.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\DFAPlayground\DFAPlayground.fsproj" />
+      <ProjectReference Include="..\Lab01\Lab01.fsproj" />
     </ItemGroup>
 
 </Project>

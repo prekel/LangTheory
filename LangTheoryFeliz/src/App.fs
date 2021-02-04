@@ -3,4 +3,4 @@ module App
 open Feliz
 
 [<ReactComponent>]
-let HelloWorld() = Html.h1 "Hello world"
+let HelloWorld () = Lab01.Lab01()

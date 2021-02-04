@@ -760,3 +760,6 @@ _opam/
 # Ionide (cross platform F# VS Code tools) working folder
 
 # End of https://www.toptal.com/developers/gitignore/api/c,csharp,jetbrains+all,ocaml,haskell,c++,cmake,visualstudiocode,visualstudio
+
+
+.fs.js

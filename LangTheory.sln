@@ -8,9 +8,11 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lab01", "Lab01\Lab01.fsproj
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lab01Fram", "Lab01Fram\Lab01Fram.fsproj", "{8BF1C58D-DE3E-47A0-AFD0-D0D1463855F2}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "App", "LangTheoryFeliz\src\App.fsproj", "{AD35D82C-6D7A-443F-B10B-1D9AF82A62F9}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LangTheoryFeliz.App", "LangTheoryFeliz\src\LangTheoryFeliz.App.fsproj", "{AD35D82C-6D7A-443F-B10B-1D9AF82A62F9}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tests", "LangTheoryFeliz\tests\Tests.fsproj", "{7D8D63E8-0649-409F-8400-117695D7EC85}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LangTheoryFeliz.Tests", "LangTheoryFeliz\tests\LangTheoryFeliz.Tests.fsproj", "{7D8D63E8-0649-409F-8400-117695D7EC85}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lab01.Core", "Lab01.Core\Lab01.Core.fsproj", "{7CBD1B49-8727-4C17-92EF-65239851C110}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,5 +44,9 @@ Global
 		{7D8D63E8-0649-409F-8400-117695D7EC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D8D63E8-0649-409F-8400-117695D7EC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D8D63E8-0649-409F-8400-117695D7EC85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CBD1B49-8727-4C17-92EF-65239851C110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CBD1B49-8727-4C17-92EF-65239851C110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CBD1B49-8727-4C17-92EF-65239851C110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CBD1B49-8727-4C17-92EF-65239851C110}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

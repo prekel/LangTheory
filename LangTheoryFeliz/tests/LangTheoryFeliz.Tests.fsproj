@@ -1,14 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>Tests</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Include="Tests.fs"/>
+        <Compile Include="Tests.fs" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\src\App.fsproj"/>
+        <PackageReference Include="Fable.Mocha" Version="2.9.1" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Fable.Mocha" Version="2.9.1"/>
+      <ProjectReference Include="..\src\LangTheoryFeliz.App.fsproj" />
     </ItemGroup>
 </Project>

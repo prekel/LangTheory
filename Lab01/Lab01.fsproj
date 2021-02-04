@@ -6,10 +6,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Fa.fs" />
-        <Compile Include="Dfa.fs" />
-        <Compile Include="Nfa.fs" />
         <Compile Include="Program.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Lab01.Core\Lab01.Core.fsproj" />
     </ItemGroup>
 
 </Project>

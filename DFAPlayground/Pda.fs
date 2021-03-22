@@ -4,7 +4,7 @@ open System
 
 let inline unimplemented () = raise <| NotImplementedException()
 
-// P<Q, Σ>
+// P<Q, Σ, Γ>
 type Pda<'State, 'InputAlphabet, 'StackAlphabet when 'State: comparison> =
     { Transition: 'State -> 'InputAlphabet option -> 'StackAlphabet -> 'State Set * 'StackAlphabet list // δ(q, a, X) -> (p, γ)
       Initial: 'State // q0

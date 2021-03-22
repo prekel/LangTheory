@@ -15,6 +15,7 @@
         <Compile Include="Else.fs" />
         <Compile Include="Nfa01.fs" />
         <Compile Include="Pda.fs" />
+        <Compile Include="Sample35.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

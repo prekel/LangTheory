@@ -73,12 +73,12 @@ open DFAPlayground
 [<EntryPoint>]
 let main _ =
     let o =
-        "101010101010000000010101010101"
+        "1001"
         |> Seq.map (Sample35.charToAlphabet)
         |> Seq.toList
 
-    let u = pdaSolve Sample35.pda o
-    let y = pdaCheck Sample35.pda o
+    let u = pdaSolve1 Sample35.pda o
+    //let y = pdaCheck Sample35.pda o
 
     printfn "%A" u
 

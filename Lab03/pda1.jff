@@ -40,20 +40,6 @@
 			<from>0</from>
 			<to>0</to>
 			<read>a</read>
-			<pop>Z</pop>
-			<push>aZ</push>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>0</to>
-			<read>a</read>
-			<pop>b</pop>
-			<push>ab</push>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>0</to>
-			<read>a</read>
 			<pop>a</pop>
 			<push>aa</push>
 		</transition>
@@ -70,6 +56,55 @@
 			<read>b</read>
 			<pop>Z</pop>
 			<push>bZ</push>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>3</to>
+			<read>a</read>
+			<pop/>
+			<push/>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>a</read>
+			<pop>Z</pop>
+			<push>aZ</push>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>a</read>
+			<pop>b</pop>
+			<push>ab</push>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>3</to>
+			<read>b</read>
+			<pop/>
+			<push/>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>3</to>
+			<read>b</read>
+			<pop>a</pop>
+			<push/>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>3</to>
+			<read>a</read>
+			<pop>b</pop>
+			<push/>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>b</read>
+			<pop>a</pop>
+			<push>ba</push>
 		</transition>
 		<transition>
 			<from>2</from>
@@ -93,46 +128,25 @@
 			<push>a</push>
 		</transition>
 		<transition>
-			<from>3</from>
-			<to>3</to>
-			<read>a</read>
-			<pop/>
-			<push/>
-		</transition>
-		<transition>
-			<from>3</from>
-			<to>3</to>
-			<read>b</read>
-			<pop/>
-			<push/>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>3</to>
-			<read>b</read>
+			<from>0</from>
+			<to>2</to>
+			<read>c</read>
 			<pop>a</pop>
-			<push/>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>3</to>
-			<read>a</read>
-			<pop>b</pop>
-			<push/>
+			<push>a</push>
 		</transition>
 		<transition>
 			<from>0</from>
 			<to>2</to>
 			<read>c</read>
-			<pop/>
-			<push/>
+			<pop>b</pop>
+			<push>b</push>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>0</to>
-			<read>b</read>
-			<pop>a</pop>
-			<push>ba</push>
+			<to>2</to>
+			<read>c</read>
+			<pop>c</pop>
+			<push>c</push>
 		</transition>
 	</automaton>
 </structure>

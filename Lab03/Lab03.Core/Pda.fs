@@ -69,3 +69,8 @@ let pdaCheck1 pda state =
     |> not
 
 let pdaCheck pda str = pdaSolve pda str |> pdaCheck1 pda
+
+let liftListOption optionList =
+    match optionList |> List.contains None with
+    | true -> None
+    | false -> optionList |> List.map Option.get |> Some

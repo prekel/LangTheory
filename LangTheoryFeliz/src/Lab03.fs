@@ -4,21 +4,22 @@ open Feliz
 
 open Lab03.Core
 
-type private State = { Pda: string }
-
 type private Msg = Update of string
+
+let update1 y charToAlphabet pda =
+    let l =
+        y
+        |> Seq.map charToAlphabet
+        |> Seq.toList
+        |> Pda.liftListOption
+
+    match l with
+    | Some g -> Pda.pdaSolve pda g |> Some
+    | None -> None
 
 let private update a b =
     match b with
-    | Update y ->
-        try
-            let l =
-                y
-                |> Seq.map (Sample35.charToAlphabet)
-                |> Seq.toList
-
-            Pda.pdaSolve Sample35.pda l |> Some
-        with ex -> None
+    | Update y -> update1 y Sample35.charToAlphabet Sample35.pda
 
 [<ReactComponent>]
 let listviz a =

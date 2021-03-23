@@ -1,4 +1,4 @@
-module LangTheoryFeliz.App.Lab01
+module LangTheoryFeliz.App.Lab03
 
 open Feliz
 

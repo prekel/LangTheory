@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module Extensions
+module LangTheoryFeliz.App.Extensions
 
 open System
 open Fable.Core

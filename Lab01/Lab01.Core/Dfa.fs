@@ -1,4 +1,4 @@
-module Dfa
+module Lab01.Core.Dfa
 
 type State =
     | Mod3Is0 // q0

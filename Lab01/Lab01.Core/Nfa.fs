@@ -1,4 +1,4 @@
-module Nfa
+module Lab01.Core.Nfa
 
 type State =
     | Initial // Q0

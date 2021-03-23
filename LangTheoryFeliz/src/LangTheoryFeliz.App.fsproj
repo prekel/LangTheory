@@ -7,6 +7,7 @@
         <None Include="index.html" />
         <Compile Include="Extensions.fs" />
         <Compile Include="Lab01.fs" />
+        <Compile Include="Lab03.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>
@@ -17,5 +18,6 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\Lab01\Lab01.Core\Lab01.Core.fsproj" />
+      <ProjectReference Include="..\..\Lab03\Lab03.Core\Lab03.Core.fsproj" />
     </ItemGroup>
 </Project>

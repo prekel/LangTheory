@@ -1,4 +1,4 @@
-module Fa
+module Lab01.Core.Fa
 
 // A<Q, Σ>
 type Dfa<'State, 'Alphabet when 'State: comparison> =

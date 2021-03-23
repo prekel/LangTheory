@@ -1,6 +1,8 @@
 ﻿open System
 open System.Text
 
+open Lab01.Core
+
 type Task =
     | Dfa
     | Nfa

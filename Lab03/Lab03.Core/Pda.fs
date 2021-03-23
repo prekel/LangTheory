@@ -57,10 +57,14 @@ let pdaSolve pda str =
     |> List.singleton
     |> statesRec
 
+let checkFunFinalState pda t =
+    Set.contains t.State pda.Final
+    && t.Str |> List.isEmpty
+
 let pdaCheck1 pda state =
     state
     |> List.head
-    |> Set.filter (fun t -> Set.contains t.State pda.Final)
+    |> Set.filter (checkFunFinalState pda)
     |> Set.isEmpty
     |> not
 

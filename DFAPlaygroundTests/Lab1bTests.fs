@@ -3,6 +3,8 @@ module Lab1bTests
 open System
 open NUnit.Framework
 
+open Lab01.Core
+
 let nToStr (n: int) len =
     let nonull = Convert.ToString(n, 2)
     (String.init (len - nonull.Length) (fun _ -> "0")) + nonull

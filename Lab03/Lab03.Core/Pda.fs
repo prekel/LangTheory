@@ -57,9 +57,11 @@ let pdaSolve pda str =
     |> List.singleton
     |> statesRec
 
-let pdaCheck pda str =
-    pdaSolve pda str
+let pdaCheck1 pda state =
+    state
     |> List.head
     |> Set.filter (fun t -> Set.contains t.State pda.Final)
     |> Set.isEmpty
     |> not
+
+let pdaCheck pda str = pdaSolve pda str |> pdaCheck1 pda

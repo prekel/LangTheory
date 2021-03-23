@@ -1,5 +1,5 @@
-﻿[<EntryPoint>]
-let main _ =
+﻿//[<EntryPoint>]
+let mainDfa _ =
     let a =
         [ "00101010100"
           "0011"
@@ -47,19 +47,39 @@ let main _ =
         >> CustomDfa.verifyCustomDfa4 Lab01Var01.Dfa44
 
     printfn "%A" (a2 |> List.map (fun c -> (c, f1 c)))
-    
-    
+
+
     let f =
         Seq.map (function
             | '0' -> Lab01Var08a.A0
             | '1' -> Lab01Var08a.A1
             | _ -> failwith "never")
-        >> CustomDfa.verifyCustomDfa2 Lab01Var08a.Dfa 
+        >> CustomDfa.verifyCustomDfa2 Lab01Var08a.Dfa
 
     printfn "%A" (a |> List.map (fun c -> (c, f c)))
-    
-    let f = CustomDfa.stateDfa4 Else.Dfa 
 
-    printfn "%A" (["else"; "elsr" ; "elser" ; "els" ] |> List.map (fun c -> (c, f c)))
+    let f = CustomDfa.stateDfa4 Else.Dfa
+
+    printfn
+        "%A"
+        ([ "else"; "elsr"; "elser"; "els" ]
+         |> List.map (fun c -> (c, f c)))
+
+    0
+
+open DFAPlayground.Pda
+open DFAPlayground
+
+[<EntryPoint>]
+let main _ =
+    let o =
+        "101010101010000000010101010101"
+        |> Seq.map (Sample35.charToAlphabet)
+        |> Seq.toList
+
+    let u = pdaSolve Sample35.pda o
+    let y = pdaCheck Sample35.pda o
+
+    printfn "%A" u
 
     0

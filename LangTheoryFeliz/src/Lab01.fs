@@ -1,6 +1,8 @@
-module Lab01
+module LangTheoryFeliz.App.Lab01
 
 open Feliz
+
+open Lab01.Core
 
 type DfaState =
     { DfaString: string

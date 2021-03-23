@@ -24,7 +24,8 @@ let Home () =
 let Router () =
     let state, dispatch = React.useReducer (update, init ())
 
-    React.router [ router.children [ match state.CurrentUrl with
+    React.router [ router.onUrlChanged (UrlChanged >> dispatch)
+                   router.children [ match state.CurrentUrl with
                                      | [] -> Home()
                                      | [ "Lab01" ] -> Lab01.Lab01()
                                      | [ "Lab03" ] -> Lab03.Lab03()

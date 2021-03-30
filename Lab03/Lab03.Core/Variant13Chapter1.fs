@@ -1,4 +1,4 @@
-module Lab03.Core.Variant13
+module Lab03.Core.Variant13Chapter1
 
 type State =
     | Q0

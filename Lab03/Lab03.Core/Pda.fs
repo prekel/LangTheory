@@ -25,13 +25,14 @@ let nextStates pda state =
             pda.Transition state.State sym (state.Stack |> List.head)
 
         sts
-        |> Set.map (fun sa ->
-            { Stack = newStack state.Stack q
-              State = sa
-              Str =
-                  match sym with
-                  | Some _ -> state.Str |> List.tail
-                  | None -> state.Str })
+        |> Set.map
+            (fun sa ->
+                { Stack = newStack state.Stack q
+                  State = sa
+                  Str =
+                      match sym with
+                      | Some _ -> state.Str |> List.tail
+                      | None -> state.Str })
 
     nextStates1 None |> Set.union
     <| match state.Str with
@@ -69,3 +70,8 @@ let pdaCheck1 pda state =
     |> not
 
 let pdaCheck pda str = pdaSolve pda str |> pdaCheck1 pda
+
+let liftListOption optionList =
+    match optionList |> List.contains None with
+    | true -> None
+    | false -> optionList |> List.map Option.get |> Some

@@ -32,9 +32,9 @@ let delta q a X =
 
 let charToAlphabet =
     function
-    | '0' -> I0
-    | '1' -> I1
-    | _ -> failwith ""
+    | '0' -> Some I0
+    | '1' -> Some I1
+    | _ -> None
 
 open Pda
 

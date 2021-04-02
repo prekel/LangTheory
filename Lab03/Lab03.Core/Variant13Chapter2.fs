@@ -16,6 +16,7 @@ type Stack =
     | SC
     | Z0
 
+/// State -> Input option -> Stack -> Set<State> * Stack list
 let delta q a X =
     match q with
     | Q0 ->
@@ -23,26 +24,29 @@ let delta q a X =
         | Some IA, SA -> Set.singleton Q0, [ SA; SA ]
         | Some IA, SB -> Set.singleton Q0, [ SA; SB ]
         | Some IA, SC -> Set.singleton Q0, []
-        | Some IA, Z0 -> Set.singleton Q1, [ SA; Z0 ]
+        | Some IA, Z0 -> Set.singleton Q0, [ SA; Z0 ]
         | Some IB, SA -> Set.singleton Q0, [ SB; SA ]
         | Some IB, SB -> Set.singleton Q0, [ SB; SB ]
         | Some IB, SC -> Set.singleton Q0, []
-        | Some IB, Z0 -> Set.singleton Q1, [ SB; Z0 ]
+        | Some IB, Z0 -> Set.singleton Q0, [ SB; Z0 ]
         | Some IC, SA -> Set.singleton Q0, []
         | Some IC, SB -> Set.singleton Q0, []
         | None, SA -> Set.singleton Q1, []
         | None, SB -> Set.singleton Q1, []
         | None, SC -> Set.singleton Q1, []
+        | Some IC, Z0 -> Set.singleton Q0, [ SC; Z0 ]
+        | Some IC, SC -> Set.singleton Q0, [ SC; SC ]
         | _ -> Set.empty, []
     | Q1 ->
         match a, X with
         | None, SA -> Set.singleton Q1, []
         | None, SB -> Set.singleton Q1, []
         | None, SC -> Set.singleton Q1, []
-        | None, SZ -> Set.singleton Q2, []
+        | None, Z0 -> Set.singleton Q2, []
         | _ -> Set.empty, []
     | Q2 -> Set.empty, []
 
+/// char -> Input option
 let charToAlphabet =
     function
     | 'a' -> Some IA
@@ -52,6 +56,7 @@ let charToAlphabet =
 
 open Pda
 
+/// Pda<State,Input,Stack>
 let pda =
     { Pda.Transition = delta
       Initial = Q0

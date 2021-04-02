@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Pda.fs" />
-        <Compile Include="Sample35.fs" />
-        <Compile Include="Variant13Chapter1.fs" />
-        <Compile Include="Variant13Chapter2.fs" />
+        <Compile Include="Pda.fs"/>
+        <Compile Include="Sample35.fs"/>
+        <Compile Include="Variant13Chapter1.fs"/>
+        <Compile Include="Variant13Chapter2.fs"/>
     </ItemGroup>
 
 </Project>

@@ -1,17 +1,22 @@
 ﻿module Lab03.Core.Pda
 
-// P<Q, Σ, Γ>
+/// P<Q, Σ, Γ>
 type Pda<'State, 'InputAlphabet, 'StackAlphabet when 'State: comparison> =
-    { Transition: 'State -> 'InputAlphabet option -> 'StackAlphabet -> 'State Set * 'StackAlphabet list // δ(q, a, X) -> (p, γ)
-      Initial: 'State // q0
-      Final: 'State Set // F
-      StackInitial: 'StackAlphabet } // Z0
+    { /// δ(q, a, X) -> (p, γ)
+      Transition: 'State -> 'InputAlphabet option -> 'StackAlphabet -> 'State Set * 'StackAlphabet list
+      /// q0
+      Initial: 'State
+      /// F
+      Final: 'State Set
+      /// Z0
+      StackInitial: 'StackAlphabet }
 
-type State<'State, 'InputAlphabet, 'StackAlphabet> =
+type SuperState<'State, 'InputAlphabet, 'StackAlphabet> =
     { Stack: 'StackAlphabet list
       State: 'State
       Str: 'InputAlphabet list }
 
+/// Pda<'a,'b,'c> -> SuperState<'a,'b,'c> -> Set<SuperState<'a,'b,'c>>
 let nextStates pda state =
     let nextStates1 sym =
         let newStack stack g =
@@ -21,7 +26,7 @@ let nextStates pda state =
             | [ x ] -> x :: (stack |> List.tail)
             | yz -> yz @ (stack |> List.tail)
 
-        let (sts, q) =
+        let sts, q =
             pda.Transition state.State sym (state.Stack |> List.head)
 
         sts
@@ -34,11 +39,15 @@ let nextStates pda state =
                       | Some _ -> state.Str |> List.tail
                       | None -> state.Str })
 
-    nextStates1 None |> Set.union
-    <| match state.Str with
-       | [] -> Set.empty
-       | _ -> nextStates1 (state.Str |> List.head |> Some)
+    match state.Stack with
+    | [] -> Set.empty
+    | _ ->
+        nextStates1 None |> Set.union
+        <| match state.Str with
+           | [] -> Set.empty
+           | _ -> nextStates1 (state.Str |> List.head |> Some)
 
+/// Pda<'a,'b,'c> -> 'b list -> Set<SuperState<'a,'b,'c>> list
 let pdaSolve pda str =
     let rec statesRec states =
         let s =
@@ -58,19 +67,22 @@ let pdaSolve pda str =
     |> List.singleton
     |> statesRec
 
+/// Pda<'a,'b,'c> -> SuperState<'a,'d,'e> -> bool
 let checkFunFinalState pda t =
-    Set.contains t.State pda.Final
-    && t.Str |> List.isEmpty
+    match Set.contains t.State pda.Final, List.isEmpty t.Str with
+    | true, true -> true
+    | _ -> false
 
+/// Pda<'a,'b,'c> -> Set<SuperState<'a,'d,'e>> list -> bool
 let pdaCheck1 pda state =
     state
-    |> List.head
-    |> Set.filter (checkFunFinalState pda)
-    |> Set.isEmpty
-    |> not
+    |> List.map (Set.exists (checkFunFinalState pda))
+    |> List.contains true
 
+/// Pda<'a,'b,'c> -> 'b list -> bool
 let pdaCheck pda str = pdaSolve pda str |> pdaCheck1 pda
 
+/// 'a option list -> 'a list option
 let liftListOption optionList =
     match optionList |> List.contains None with
     | true -> None

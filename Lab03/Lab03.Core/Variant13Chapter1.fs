@@ -5,6 +5,7 @@ type State =
     | Q1
     | Q2
     | Q3
+    | Q4
 
 type Input =
     | IA
@@ -17,6 +18,7 @@ type Stack =
     | SC
     | Z0
 
+/// State -> Input option -> Stack -> Set<State> * Stack list
 let delta q a X =
     match q with
     | Q0 ->
@@ -30,6 +32,7 @@ let delta q a X =
         | Some IC, SC -> Set.singleton Q1, [ SC ]
         | Some IC, SB -> Set.singleton Q1, [ SB ]
         | Some IC, SA -> Set.singleton Q1, [ SA ]
+        | Some IC, Z0 -> Set.singleton Q2, [ Z0 ]
         | _ -> Set.empty, []
     | Q1 ->
         match a, X with
@@ -43,13 +46,19 @@ let delta q a X =
         | Some IB, SB -> Set.singleton Q2, []
         | Some IA, SB -> Set.singleton Q3, []
         | Some IB, SA -> Set.singleton Q3, []
+        | Some IA, Z0 -> Set.singleton Q3, [ Z0 ]
+        | Some IB, Z0 -> Set.singleton Q3, [ Z0 ]
+        | None, SA -> Set.singleton Q4, []
+        | None, SB -> Set.singleton Q4, []
         | _ -> Set.empty, []
     | Q3 ->
         match a, X with
-        | Some IA, _ -> Set.singleton Q3, []
-        | Some IB, _ -> Set.singleton Q3, []
+        | Some IA, _ -> Set.singleton Q3, [ X ]
+        | Some IB, _ -> Set.singleton Q3, [ X ]
         | _ -> Set.empty, []
+    | Q4 -> Set.empty, []
 
+/// char -> Input option
 let charToAlphabet =
     function
     | 'a' -> Some IA
@@ -59,8 +68,9 @@ let charToAlphabet =
 
 open Pda
 
+/// Pda<State,Input,Stack>
 let pda =
     { Pda.Transition = delta
       Initial = Q0
-      Final = Set.ofList [ Q1; Q3 ]
+      Final = Set.ofList [ Q1; Q3; Q4 ]
       StackInitial = Z0 }

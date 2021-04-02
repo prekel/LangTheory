@@ -6,11 +6,11 @@ open Lab03.Core
 
 
 type PdaVar =
-    | Sample35 of Set<Pda.State<Sample35.State, Sample35.Input, Sample35.Stack>> list option
+    | Sample35 of Set<Pda.SuperState<Sample35.State, Sample35.Input, Sample35.Stack>> list option
     | Variant13Chapter1 of
-        Set<Pda.State<Variant13Chapter1.State, Variant13Chapter1.Input, Variant13Chapter1.Stack>> list option
+        Set<Pda.SuperState<Variant13Chapter1.State, Variant13Chapter1.Input, Variant13Chapter1.Stack>> list option
     | Variant13Chapter2 of
-        Set<Pda.State<Variant13Chapter2.State, Variant13Chapter2.Input, Variant13Chapter2.Stack>> list option
+        Set<Pda.SuperState<Variant13Chapter2.State, Variant13Chapter2.Input, Variant13Chapter2.Stack>> list option
 
 type private Msg =
     | Update of string
@@ -72,7 +72,7 @@ let Lab03 () =
         | false -> "Отвергнуто"
         | true -> "Принято"
 
-    let listviz (a: Set<Pda.State<_, _, _>> list option) =
+    let listviz (a: Set<Pda.SuperState<_, _, _>> list option) =
         match a with
         | Some a ->
             a

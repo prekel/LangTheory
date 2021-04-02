@@ -7,6 +7,7 @@ open NUnit.Framework
 let Setup () = ()
 
 [<Test>]
+[<Ignore(")")>]
 let Test1 () =
     let dfa = Lab01Var01b.Dfa
     let random = Random()

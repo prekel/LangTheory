@@ -7,6 +7,7 @@ type PdaVar =
     | Variant13Chapter1
     | Variant13Chapter2
 
+/// PdaVar -> seq<char> -> bool option
 let pdaVarToPda pdaVar str =
     let toBoolOption pda charToAlphabet =
         str
@@ -20,8 +21,10 @@ let pdaVarToPda pdaVar str =
     | Variant13Chapter1 -> toBoolOption Variant13Chapter1.pda Variant13Chapter1.charToAlphabet
     | Variant13Chapter2 -> toBoolOption Variant13Chapter2.pda Variant13Chapter2.charToAlphabet
 
+/// unit -> string
 let input () = Console.ReadLine()
 
+/// unit -> Result<PdaVar,string>
 let inputTask () =
     match Console.ReadLine() with
     | "1"
@@ -32,13 +35,15 @@ let inputTask () =
     | "Variant13Chapter2" -> Ok Variant13Chapter2
     | _ -> Error "Неверный номер автомата"
 
+/// bool -> string
 let boolToResult =
     function
-    | false -> "Отвергнуто"
     | true -> "Принято"
+    | false -> "Отвергнуто"
 
+/// string [] -> int
 [<EntryPoint>]
-let main argv =
+let main _ =
     //Console.OutputEncoding <- Encoding.Unicode
     //Console.InputEncoding <- Encoding.Unicode
 

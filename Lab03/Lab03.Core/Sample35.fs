@@ -14,6 +14,7 @@ type Stack =
     | S1
     | Z0
 
+/// State -> Input option -> Stack -> Set<State> * Stack list
 let delta q a X =
     match q, a, X with
     | Q0, Some I0, Z0 -> Set.singleton Q0, [ S0; Z0 ]
@@ -30,6 +31,7 @@ let delta q a X =
     | Q1, None, Z0 -> Set.singleton Q2, [ Z0 ]
     | _ -> Set.empty, []
 
+/// char -> Input option
 let charToAlphabet =
     function
     | '0' -> Some I0
@@ -38,6 +40,7 @@ let charToAlphabet =
 
 open Pda
 
+/// Pda<State,Input,Stack>
 let pda =
     { Pda.Transition = delta
       Initial = Q0

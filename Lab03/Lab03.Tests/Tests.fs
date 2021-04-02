@@ -5,6 +5,7 @@ open Swensen.Unquote
 
 open Lab03.Core
 
+/// 'a list -> int -> 'a list list
 let private brute inputAlphabet length =
     []
     :: ([ 1 .. length ]

@@ -34,76 +34,58 @@ let ``test1`` () =
                    |> Pda.pdaSolve Sample35.pda
                    |> Pda.pdaCheck1 Sample35.pda) @>
 
+
+let vxx inputAlphabet length =
+    [ 1 .. length ]
+    |> List.collect
+        (fun n ->
+            (inputAlphabet |> List.map List.singleton, [ 1 .. n - 1 ])
+            ||> List.fold (fun st _ -> List.collect (fun l -> inputAlphabet |> List.map (fun g -> g :: l)) st)
+            |> List.sort)
+
 [<Test>]
-let ``qwe`` () =
-    let values =
-        [ None
-          Some Sample35.I0
-          Some Sample35.I1 ]
-
-    let v2 =
-        values
-        |> List.collect (fun l -> values |> List.map (fun g -> [ l; g ]))
-        |> List.collect (fun l -> values |> List.map (fun g -> l @ [ g ]))
-        |> List.collect (fun l -> values |> List.map (fun g -> l @ [ g ]))
-        |> List.collect (fun l -> values |> List.map (fun g -> l @ [ g ]))
-        |> List.map (fun l -> l |> List.skipWhile Option.isNone)
-
+let ``Все возможные строки длиной от 1 до 10 для примера 35`` () =
     let values = [ Sample35.I0; Sample35.I1 ]
 
+    let y = vxx values 10
 
-    let v4 =
-        ([ values ], values)
-        ||> List.fold (fun st t -> (st |> List.head |> List.tail) :: st)
+    let checker (l: Sample35.Input list) =
+        match (l |> List.length) % 2, l |> List.rev with
+        | 0, r when r = l -> true
+        | _ -> false
 
-    let v3 =
-        [ 1 .. 4 ]
-        |> List.collect
-            (fun n ->
-                ([], [ 1 .. n ])
-                ||> List.fold
-                        (fun st t ->
-                            values
-                            |> List.collect (fun l -> values |> List.map (fun g -> l :: [ g ]))))
+    y
+    |> List.iter
+        (fun l ->
+            test
+                <@ checker l = (Pda.pdaSolve Sample35.pda l
+                                |> Pda.pdaCheck1 Sample35.pda) @>)
 
-    let v1 = values |> List.map (fun g -> [ g ])
 
-    let v2 =
-        values
-        |> List.collect (fun l -> values |> List.map (fun g -> [ l; g ]))
+[<Test>]
+let ``Все возможные строки длиной от 1 до 10 для Варианта 1 (Часть 1)`` () =
+    let values =
+        [ Variant13Chapter1.IA
+          Variant13Chapter1.IB
+          Variant13Chapter1.IC ]
 
-    let v3 =
-        values
-        |> List.map (fun g -> [ g ])
-        |> List.collect (fun l -> values |> List.map (fun g -> g :: l))
-        |> List.collect (fun l -> values |> List.map (fun g -> g :: l))
-        |> List.sort
+    let y = vxx values 10
 
-    let v1 = values |> List.map (fun g -> [ g ])
+    let checker (l: Variant13Chapter1.Input list) =
+        match l
+              |> List.filter ((=) Variant13Chapter1.IC)
+              |> List.length with
+        | 1 ->
+            let beforeC =
+                l |> List.takeWhile ((<>) Variant13Chapter1.IC)
 
-    let f =
-        List.collect (fun l -> values |> List.map (fun g -> g :: l))
+            let afterC = l |> List.skip (List.length beforeC + 1) |> List.rev
+            beforeC <> afterC
+        | _ -> false
 
-    let vx n =
-        (v1, [ 1 .. n - 1 ])
-        ||> List.fold (fun st t -> f st)
-        |> List.sort
-
-    let v1 = vx 1
-    let v2 = vx 2
-    let v3 = vx 3
-    let v123 = v1 @ v2 @ v3
-
-    let f values =
-        List.collect (fun l -> values |> List.map (fun g -> g :: l))
-
-    let vxx values n =
-        [ 1 .. n ]
-        |> List.collect
-            (fun n ->
-                (values |> List.map List.singleton, [ 1 .. n - 1 ])
-                ||> List.fold (fun st _ -> List.collect (fun l -> values |> List.map (fun g -> g :: l)) st)
-                |> List.sort)
-
-    let y = vxx values 3
-    test <@ [] = y @>
+    y
+    |> List.iter
+        (fun l ->
+            test
+                <@ checker l = (Pda.pdaSolve Variant13Chapter1.pda l
+                                |> Pda.pdaCheck1 Variant13Chapter1.pda) @>)

@@ -30,6 +30,7 @@ let delta q a X =
         | Some IC, SC -> Set.singleton Q1, [ SC ]
         | Some IC, SB -> Set.singleton Q1, [ SB ]
         | Some IC, SA -> Set.singleton Q1, [ SA ]
+        | Some IC, Z0 -> Set.singleton Q1, [ Z0 ]
         | _ -> Set.empty, []
     | Q1 ->
         match a, X with
@@ -43,6 +44,7 @@ let delta q a X =
         | Some IB, SB -> Set.singleton Q2, []
         | Some IA, SB -> Set.singleton Q3, []
         | Some IB, SA -> Set.singleton Q3, []
+        | None, Z0 -> Set.singleton Q3, [ ]
         | _ -> Set.empty, []
     | Q3 ->
         match a, X with

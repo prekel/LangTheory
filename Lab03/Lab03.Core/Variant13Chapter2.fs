@@ -33,6 +33,8 @@ let delta q a X =
         | None, SA -> Set.singleton Q1, []
         | None, SB -> Set.singleton Q1, []
         | None, SC -> Set.singleton Q1, []
+        | Some IC, Z0 -> Set.singleton Q0, [ SC; Z0 ]
+        | Some IC, SC -> Set.singleton Q0, [ SC; SC ]
         | _ -> Set.empty, []
     | Q1 ->
         match a, X with

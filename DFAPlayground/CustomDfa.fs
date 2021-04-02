@@ -88,3 +88,23 @@ let verifyNfa nfa str =
     |> Set.intersect nfa.Final
     |> Set.isEmpty
     |> (=) false
+
+
+//// A<Q, Σ>
+//type Nfa1<'State, 'Alphabet> =
+//    { Transition: 'State -> 'Alphabet -> ('State -> bool) // δ
+//      Initial: 'State // q0
+//      Final: 'State -> bool } // F
+//    
+//let stateNfa (nfa: Nfa1<_,_>) str =
+//    (Set.singleton nfa.Initial, str)
+//    ||> Seq.fold (fun states current ->
+//            states
+//            |> Set.map (fun s -> nfa.Transition s current)
+//            |> Set.unionMany)
+//
+//let verifyNfa nfa str =
+//    stateNfa nfa str
+//    |> Set.intersect nfa.Final
+//    |> Set.isEmpty
+//    |> (=) false

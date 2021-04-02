@@ -34,10 +34,13 @@ let nextStates pda state =
                       | Some _ -> state.Str |> List.tail
                       | None -> state.Str })
 
-    nextStates1 None |> Set.union
-    <| match state.Str with
-       | [] -> Set.empty
-       | _ -> nextStates1 (state.Str |> List.head |> Some)
+    match state.Stack with
+    | [] -> Set.empty
+    | _ ->
+        nextStates1 None |> Set.union
+        <| match state.Str with
+           | [] -> Set.empty
+           | _ -> nextStates1 (state.Str |> List.head |> Some)
 
 let pdaSolve pda str =
     let rec statesRec states =
@@ -59,15 +62,14 @@ let pdaSolve pda str =
     |> statesRec
 
 let checkFunFinalState pda t =
-    Set.contains t.State pda.Final
-    && t.Str |> List.isEmpty
+    match Set.contains t.State pda.Final, List.isEmpty t.Str with
+    | true, true -> true
+    | _ -> false
 
 let pdaCheck1 pda state =
     state
-    |> List.head
-    |> Set.filter (checkFunFinalState pda)
-    |> Set.isEmpty
-    |> not
+    |> List.map (Set.exists (checkFunFinalState pda))
+    |> List.contains true
 
 let pdaCheck pda str = pdaSolve pda str |> pdaCheck1 pda
 

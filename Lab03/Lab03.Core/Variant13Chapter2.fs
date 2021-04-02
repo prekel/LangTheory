@@ -42,7 +42,7 @@ let delta q a X =
         | None, SA -> Set.singleton Q1, []
         | None, SB -> Set.singleton Q1, []
         | None, SC -> Set.singleton Q1, []
-        | None, SZ -> Set.singleton Q2, []
+        | None, Z0 -> Set.singleton Q2, []
         | _ -> Set.empty, []
     | Q2 -> Set.empty, []
 

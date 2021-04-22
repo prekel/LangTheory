@@ -5,7 +5,7 @@ type Jflap = XmlProvider<"LL_binary_v5.jff">
 let rightToString (right: Jflap.Right) =
     match right.Number with
     | Some n -> string n
-    | None -> right.String |> Option.defaultValue ""
+    | None -> right.String |> Option.defaultValue "^"
 
 let productionsToTupleSeq (p: Jflap.Production []) =
     seq {
